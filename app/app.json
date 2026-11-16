@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "Compra Fácil",
+    "slug": "compra-facil",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,6 +19,18 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "O Compra Fácil precisa acessar suas fotos para adicionar imagens aos produtos.",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
+      ],
+      "expo-font",
+      "expo-status-bar"
+    ]
   }
 }
