@@ -1,6 +1,7 @@
 
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { Platform } from 'react-native';
 
 import {
   initializeAuth,
@@ -28,15 +29,19 @@ const app = getApps().length
 // BANCO DE DADOS
 export const db = getFirestore(app);
 
-// AUTENTICAÇÃO COM ARMAZENAMENTO NO DISPOSITIVO
+// AUTENTICAÇÃO
 let auth;
 
-try {
-  auth = initializeAuth(app, {
-    persistence: getReactNativePersistence(AsyncStorage),
-  });
-} catch (error) {
+if (Platform.OS === 'web') {
   auth = getAuth(app);
+} else {
+  try {
+    auth = initializeAuth(app, {
+      persistence: getReactNativePersistence(AsyncStorage),
+    });
+  } catch (error) {
+    auth = getAuth(app);
+  }
 }
 
 export { auth };

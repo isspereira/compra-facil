@@ -1,74 +1,81 @@
+
 # Compra Fácil
 
-Aplicativo mobile para criar e organizar listas de compras, acompanhar produtos comprados e consultar o valor estimado da lista. Desenvolvido com React Native, Expo, React Navigation e Firebase Firestore.
+Aplicativo mobile desenvolvido para criar e organizar listas de compras, acompanhar produtos comprados e consultar o valor estimado das compras. O projeto foi desenvolvido com React Native, Expo, React Navigation e Firebase Firestore.
 
-## Funcionalidades implementadas
+## Funcionalidades
 
 - Cadastro, edição e exclusão de produtos.
-- Quantidade e preço unitário, com cálculo do total estimado.
+- Registro de quantidade e preço unitário.
+- Cálculo do valor total estimado da lista.
 - Marcação de produtos como comprados.
 - Resumo de produtos pendentes e comprados.
-- Seleção de foto pela galeria do dispositivo.
+- Seleção de fotos pela galeria do dispositivo.
 - Navegação com Native Stack e Bottom Tabs.
-- Estado compartilhado com Context API.
+- Gerenciamento de estado compartilhado com Context API.
 - Autenticação anônima e sincronização em tempo real com Cloud Firestore.
 
-## Tecnologias
+## Tecnologias utilizadas
 
-- Expo SDK 58 / React Native.
-- React Navigation 7 (Native Stack + Bottom Tabs).
-- Firebase JS SDK: Authentication e Cloud Firestore.
-- Expo Image Picker e Expo Vector Icons.
+- React Native e Expo SDK 58.
+- React Navigation 7 (Native Stack e Bottom Tabs).
+- Firebase JavaScript SDK.
+- Firebase Authentication.
+- Cloud Firestore.
+- Expo Image Picker.
+- Expo Vector Icons.
 - AsyncStorage para persistência da sessão de autenticação.
 
-## Requisitos para executar
+## Requisitos para execução
 
-- Node.js 24.12.0 ou superior (a versão Firebase 13 resolvida pelo lockfile declara esse requisito).
+- Node.js 24.12.0 ou superior.
 - npm.
-- Aplicativo Expo Go compatível com o SDK do projeto, ou emulador/dispositivo configurado.
+- Aplicativo Expo Go compatível com o SDK do projeto ou emulador/dispositivo configurado.
 - Projeto Firebase com Authentication anônimo habilitado e Cloud Firestore criado.
 
 ## Instalação e execução
 
 1. Baixe ou clone este repositório.
-2. Abra um terminal na pasta `app` (é nela que está o `package.json`).
+2. Abra um terminal dentro da pasta `app`, onde está localizado o arquivo `package.json`.
 3. Instale as dependências:
 
-   ```bash
-   npm ci
-   ```
+```bash
+npm ci
+```
 
-   Se o terminal informar versão incompatível do Node.js, atualize para Node 24.12.0 ou superior e repita o comando.
+4. Confira as configurações e a compatibilidade do projeto:
 
-4. Confira se as versões e configurações do Expo estão corretas:
-
-   ```bash
-   npx expo-doctor
-   ```
+```bash
+npx expo-doctor
+```
 
 5. Inicie o aplicativo:
 
-   ```bash
-   npx expo start
-   ```
+```bash
+npx expo start
+```
 
 6. Leia o QR Code com o Expo Go compatível ou pressione `a` para abrir no emulador Android configurado.
 
-## Configuração do Firebase (obrigatória)
+## Configuração do Firebase
 
-1. Acesse o [Firebase Console](https://console.firebase.google.com/) e abra o projeto usado pela equipe (ou crie um projeto de teste).
-2. Em **Authentication > Sign-in method**, habilite **Anonymous**. O aplicativo usa `signInAnonymously`; sem essa opção, a autenticação falhará.
-3. Em **Firestore Database**, crie o banco de dados.
-4. Abra **Firestore Database > Rules** e publique o conteúdo do arquivo `firestore.rules` que acompanha este repositório. Não deixe o banco em modo de teste aberto.
-5. Em **Configurações do projeto > Seus apps**, registre/consulte um app Web e copie as configurações do Firebase.
-6. Confira os valores de configuração no arquivo `app/src/firebase.js` e substitua-os pelos dados do projeto de teste da equipe, se necessário.
-7. Execute novamente o aplicativo e teste cadastro, leitura, edição e exclusão.
+Para executar o aplicativo, é necessário configurar um projeto Firebase.
 
-> A configuração web do Firebase contém identificadores e uma API key de projeto; ela não substitui regras de segurança. A proteção dos dados é feita principalmente pelas regras do Firestore. Nunca coloque credenciais privadas de servidor ou service-account no aplicativo.
+1. Acesse o [Firebase Console](https://console.firebase.google.com/) e abra o projeto utilizado no desenvolvimento ou crie um projeto de teste.
+2. Acesse **Authentication > Sign-in method** e habilite o método de autenticação **Anonymous**.
+3. Acesse **Firestore Database** e crie o banco de dados.
+4. Abra **Firestore Database > Rules** e publique as regras disponíveis no arquivo `firestore.rules`, localizado na raiz do repositório.
+5. Em **Configurações do projeto > Seus apps**, registre ou consulte um aplicativo Web e obtenha as configurações do Firebase.
+6. Confira os valores de configuração no arquivo `app/src/firebase.js`. Caso utilize outro projeto Firebase, substitua os valores pelas configurações correspondentes.
+7. Execute novamente o aplicativo e teste as operações de cadastro, leitura, edição e exclusão de produtos.
+
+**Importante:** a configuração do Firebase contém identificadores e uma chave de API do projeto. Esses dados não substituem as regras de segurança do Firestore. Nunca inclua credenciais privadas de servidor ou arquivos de service account no aplicativo.
 
 ## Observação sobre as fotos
 
-Nesta versão, o app grava a URI local retornada pela galeria. Isso funciona para visualizar a imagem no mesmo dispositivo enquanto o arquivo local continuar disponível, mas não faz upload para a nuvem. Para que outros dispositivos vejam a mesma foto, será necessário integrar o Firebase Storage e salvar no Firestore a URL de download.
+Nesta versão, o aplicativo armazena a URI local retornada pela galeria do dispositivo. A imagem pode ser visualizada no mesmo dispositivo enquanto o arquivo local continuar disponível, mas não é realizado upload para a nuvem.
+
+Para disponibilizar as mesmas fotos em outros dispositivos, será necessário integrar o Firebase Storage e armazenar no Firestore a URL de download da imagem.
 
 ## Estrutura do repositório
 
@@ -76,6 +83,11 @@ Nesta versão, o app grava a URI local retornada pela galeria. Isso funciona par
 compra-facil-feature-telas-iniciais/
 ├── README.md
 ├── firestore.rules
+├── docs/
+│   └── screenshots/
+│       ├── tela-inicial.png
+│       ├── cadastro-produto.png
+│       └── resumo.png
 └── app/
     ├── App.js
     ├── app.json
@@ -90,3 +102,59 @@ compra-facil-feature-telas-iniciais/
     │   └── firebase.js
     └── assets/
 ```
+
+## Controle de versão e Git Flow
+
+O projeto está versionado em um repositório Git. Durante o desenvolvimento, foi utilizada a branch `feature/telas-iniciais`, na qual as alterações foram registradas em commits e enviadas ao repositório remoto.
+
+A organização do fluxo Git Flow considera as seguintes branches:
+
+- `main`: versão estável do projeto.
+- `develop`: integração das funcionalidades desenvolvidas.
+- `feature/nome-da-funcionalidade`: desenvolvimento de funcionalidades específicas.
+
+Fluxo recomendado para o desenvolvimento:
+
+```bash
+git checkout develop
+git pull origin develop
+git checkout -b feature/nome-da-funcionalidade
+
+git add .
+git commit -m "feat: descreve a funcionalidade"
+git push -u origin feature/nome-da-funcionalidade
+```
+
+Após a implementação e os testes, as alterações podem ser integradas à branch `develop`. Quando a versão estiver finalizada e validada, ela poderá ser integrada à branch `main`.
+
+Por se tratar de um projeto individual, os commits registram as etapas e alterações realizadas durante o desenvolvimento.
+
+## Integrante e responsabilidades
+
+| Integrante | Responsabilidades |
+|---|---|
+| Isabele de Souza Pereira | Desenvolvimento do Compra Fácil, criação das telas, navegação, gerenciamento de estado, integração com Firebase, implementação das funcionalidades e testes do aplicativo. |
+
+## Capturas de tela
+
+### Tela inicial
+
+![Tela inicial](docs/screenshots/tela-inicial.png)
+
+### Cadastro de produto
+
+![Cadastro de produto](docs/screenshots/cadastro-produto.png)
+
+### Resumo de compras
+
+![Resumo de compras](docs/screenshots/resumo.png)
+
+## Demonstração final
+
+O aplicativo será apresentado ao vivo, com demonstração das principais funcionalidades:
+
+- Cadastro de produtos.
+- Edição e exclusão de produtos.
+- Marcação de produtos como comprados.
+- Consulta ao resumo das compras.
+- Sincronização dos dados com o Firebase Firestore.
