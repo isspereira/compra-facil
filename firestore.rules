@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /products/{productId} {
+      allow read: if request.auth != null
+        && resource.data.ownerId == request.auth.uid;
+
+      allow create: if request.auth != null
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.keys().hasOnly([
+          'name', 'quantity', 'price', 'purchased', 'imageUri', 'ownerId'
+        ])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.quantity is number
+        && request.resource.data.quantity > 0
+        && request.resource.data.price is number
+        && request.resource.data.price >= 0
+        && request.resource.data.purchased is bool;
+
+      allow update: if request.auth != null
+        && resource.data.ownerId == request.auth.uid
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'name', 'quantity', 'price', 'purchased', 'imageUri'
+        ])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.quantity is number
+        && request.resource.data.quantity > 0
+        && request.resource.data.price is number
+        && request.resource.data.price >= 0
+        && request.resource.data.purchased is bool;
+
+      allow delete: if request.auth != null
+        && resource.data.ownerId == request.auth.uid;
+    }
+  }
+}

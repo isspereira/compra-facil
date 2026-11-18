@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Compra Fácil",
+    "slug": "compra-facil",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "O Compra Fácil precisa acessar suas fotos para adicionar imagens aos produtos.",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
+      ],
+      "expo-font",
+      "expo-status-bar"
+    ]
+  }
+}
